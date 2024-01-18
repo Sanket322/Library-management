@@ -18,7 +18,8 @@
   "description",
   "route",
   "published",
-  "quentity"
+  "quentity",
+  "price"
  ],
  "fields": [
   {
@@ -29,6 +30,8 @@
   {
    "fieldname": "author",
    "fieldtype": "Data",
+   "in_filter": 1,
+   "in_standard_filter": 1,
    "label": "Author"
   },
   {
@@ -53,8 +56,10 @@
    "label": "Publisher"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "article_name",
    "fieldtype": "Data",
+   "in_global_search": 1,
    "in_list_view": 1,
    "label": "Article Name",
    "reqd": 1,
@@ -84,16 +89,21 @@
    "fieldname": "quentity",
    "fieldtype": "Int",
    "label": "Total quentity"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Int",
+   "label": "Price"
   }
  ],
  "has_web_view": 1,
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2024-01-03 21:21:08.325247",
+ "modified": "2024-01-10 10:58:35.878049",
  "modified_by": "Administrator",
  "module": "Library Management System",
- "name": "Article",
+ "name": "Books",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
@@ -132,7 +142,7 @@
   }
  ],
  "quick_entry": 1,
- "route": "articles",
+ "route": "books",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

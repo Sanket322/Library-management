@@ -6,23 +6,29 @@
  "engine": "InnoDB",
  "field_order": [
   "article",
+  "price",
   "library_member",
   "type",
   "date",
+  "fees",
   "amended_from"
  ],
  "fields": [
   {
    "fieldname": "article",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Article",
-   "options": "Article"
+   "options": "Books",
+   "reqd": 1
   },
   {
    "fieldname": "library_member",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Library Member",
-   "options": "Library Member"
+   "options": "Library Member",
+   "reqd": 1
   },
   {
    "fieldname": "type",
@@ -44,12 +50,25 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "fees",
+   "fieldtype": "Data",
+   "label": "Fees",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "article.price",
+   "fieldname": "price",
+   "fieldtype": "Int",
+   "label": "Price",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-03 22:54:08.874062",
+ "modified": "2024-01-18 22:56:04.874501",
  "modified_by": "Administrator",
  "module": "Library Management System",
  "name": "Library Transaction",

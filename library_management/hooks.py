@@ -6,13 +6,6 @@ app_email = "shahsanket322003@gmail.com"
 app_license = "mit"
 
 
-test_string = "value"
-test_list = ["value"]
-test_dict = {
-    "key": "value"
-}
-
-
 # required_apps = []
 
 # Includes in <head>

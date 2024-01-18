@@ -5,5 +5,5 @@ import frappe
 from frappe.website.website_generator import WebsiteGenerator
 
 
-class Article(WebsiteGenerator):
+class Books(WebsiteGenerator):
 	pass

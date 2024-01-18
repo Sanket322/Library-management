@@ -22,6 +22,7 @@
    "reqd": 1
   },
   {
+   "default": "Today",
    "fieldname": "from_date",
    "fieldtype": "Date",
    "label": "From Date"
@@ -49,9 +50,10 @@
    "search_index": 1
   }
  ],
+ "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-03 22:55:01.119852",
+ "modified": "2024-01-18 22:43:07.528023",
  "modified_by": "Administrator",
  "module": "Library Management System",
  "name": "Library Membership",

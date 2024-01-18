@@ -9,6 +9,7 @@ from frappe.model.document import DocStatus
 class LibraryMembership(Document):
 
 	def before_submit(self):
+
 		exists = frappe.db.exists(
 			"Library Membership",
 			{

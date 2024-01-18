@@ -16,7 +16,7 @@ frappe.ui.form.on('Library Member', {
         frm.set_value("full_name", (frm.doc.first_name ? frm.doc.first_name+" " : "") + frm.doc.last_name)
     },
 
-
+    
     refresh: function (frm) {
         
         frm.add_custom_button('Create Membership', () => {
