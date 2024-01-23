@@ -62,10 +62,11 @@ class LibraryTransaction(Document):
             filters = {
                 'library_member' : self.library_member,
             },
-            fields = ['price','type']
+            fields = ['price','type','article']
         )
+        # print(member_transaction)
         
-        member_debt = self.price;
+        member_debt = 0;
         for dict in member_transaction:
                 if (dict['type'] == 'Issue' ):
                     member_debt += dict['price']
@@ -73,7 +74,10 @@ class LibraryTransaction(Document):
                     member_debt -= dict['price']
 
         maximum_outstanding_debt = frappe.db.get_single_value('Library Settings','maximum_outstanding_debt')
-        if(member_debt >= maximum_outstanding_debt):
+        
+        # print(member_debt)
+
+        if(member_debt > maximum_outstanding_debt):
            frappe.throw("Your outstanding debt is more than 500")
         
 

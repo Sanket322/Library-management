@@ -24,7 +24,7 @@
   {
    "fieldname": "rent_fees",
    "fieldtype": "Int",
-   "label": "Rent fees"
+   "label": "Rent fees per book"
   },
   {
    "fieldname": "borrowing_period",
@@ -35,7 +35,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-01-05 13:36:05.553888",
+ "modified": "2024-01-22 22:35:49.140879",
  "modified_by": "Administrator",
  "module": "Library Management System",
  "name": "Library Settings",
