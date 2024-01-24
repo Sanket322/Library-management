@@ -26,6 +26,7 @@ class Buying(Document):
 				'doctype': 'Books',
 				'article_name': books[i]['article_name'],
 				'author': books[i]['author'],
+                'isbn' : books[i]['isbn'],
 				'status': 'Available',
 				'route': books[i]['route'],
 				'price': 100,
@@ -35,7 +36,11 @@ class Buying(Document):
             try:
                 book_doc.insert()
             except Exception as e:
-                return f"Error inserting data: {e}"
+                #if code duplication error comes don;t break this
+                if e.http_status_code == 409:
+                    pass
+                else:
+                    return f"Error inserting data: {e}"
 
         return "Data inserted successfully"
     

@@ -65,15 +65,15 @@ async function checkNewBooks(api, newBookDetail, existingBooks) {
     var booksdetail = await fetchBooks(api)
 
     for (let i = 0; i < booksdetail.length; i++) {
-        let flag = 0;
-        for (let j = 0; j < existingBooks.length; j++) {
+        let j=0;
+        for (j = 0; j < existingBooks.length; j++) {
 
-            if (existingBooks[j].name === booksdetail[i].article_name) {
-                flag = 1;
+            if (existingBooks[j]['name'].trim() == booksdetail[i]['article_name'].trim() 
+            || existingBooks[j]['isbn'] == booksdetail[i]['isbn'] ) {
                 break;
             }
         }
-        if (flag != 1) newBookDetail.push(booksdetail[i])
+        if (j == existingBooks.length) newBookDetail.push(booksdetail[i])
     }
     return newBookDetail;
 }
@@ -86,6 +86,7 @@ async function fetchBooks(api) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data);
 
         const booksdetail = data.message.map(book => {
             return {
@@ -93,6 +94,7 @@ async function fetchBooks(api) {
                 'article_name': book.title,
                 'author': book.authors,
                 'status': 'Available',
+                'isbn' : book.isbn,
                 'route': book.isbn,
                 'price': 100,
                 'published': 1,
