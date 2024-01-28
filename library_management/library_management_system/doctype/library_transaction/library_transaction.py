@@ -12,7 +12,7 @@ class LibraryTransaction(Document):
             self.validate_issue()
             self.validate_outstanding_debt()
 
-            article = frappe.get_doc("Books", self.article)
+            article = frappe.get_doc("Book", self.article)
             article.quentity = article.quentity - 1
             if article.quentity == 0:
                 article.status = "Issued"
@@ -21,7 +21,7 @@ class LibraryTransaction(Document):
 
         elif self.type == "Return":
 
-            article = frappe.get_doc("Books", self.article)
+            article = frappe.get_doc("Book", self.article)
             article.quentity = article.quentity + 1
             article.status = "Available"
             article.save()
@@ -48,7 +48,7 @@ class LibraryTransaction(Document):
 
     def validate_issue(self):
         self.validate_membership()
-        article = frappe.get_doc("Books", self.article)
+        article = frappe.get_doc("Book", self.article)
         if article.status == "Issued":
             frappe.throw("All Copy of this book are issued")
 
