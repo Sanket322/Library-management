@@ -31,6 +31,7 @@
    "fieldname": "to_date",
    "fieldtype": "Date",
    "label": "To Date"
+   
   },
   {
    "fetch_from": "library_member.full_name",
@@ -53,7 +54,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-18 22:43:07.528023",
+ "modified": "2024-01-27 22:47:22.062608",
  "modified_by": "Administrator",
  "module": "Library Management System",
  "name": "Library Membership",

@@ -1,7 +1,8 @@
-// Copyright (c) 2024, sanket and contributors
-// For license information, please see license.txt
-
 frappe.ui.form.on('Library Membership', {
+
+    refresh : function(frm){
+        frm.set_value("to_date",frappe.datetime.add_days(frappe.datetime.now_date(),30))
+    },
 
     from_date: function (frm) {
         if (frm.doc.from_date < frappe.datetime.now_date()) {

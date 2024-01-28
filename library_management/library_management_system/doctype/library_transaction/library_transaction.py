@@ -2,9 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.model.document import Document
-from frappe.model.docstatus import DocStatus
-
+from frappe.model.document import Document,DocStatus
 
 class LibraryTransaction(Document):
 
@@ -23,8 +21,6 @@ class LibraryTransaction(Document):
 
         elif self.type == "Return":
 
-            # self.recordExists()
-
             article = frappe.get_doc("Books", self.article)
             article.quentity = article.quentity + 1
             article.status = "Available"
@@ -38,13 +34,13 @@ class LibraryTransaction(Document):
             filters = {
                 'article' : self.article,
                 'library_member' : self.library_member,
-                'type' : "Issue",
-                'date' : ("<",self.date),
+                'date' : ("<=",self.date),
                 "docstatus": DocStatus.submitted()
             },
             fields = ['date']
         ) 
-        if memberExists :
+        
+        if len(memberExists)%2==1 :
             return memberExists
         else : 
             return "No record present"
@@ -64,7 +60,6 @@ class LibraryTransaction(Document):
             },
             fields = ['price','type','article']
         )
-        # print(member_transaction)
         
         member_debt = 0;
         for dict in member_transaction:
@@ -74,8 +69,6 @@ class LibraryTransaction(Document):
                     member_debt -= dict['price']
 
         maximum_outstanding_debt = frappe.db.get_single_value('Library Settings','maximum_outstanding_debt')
-        
-        # print(member_debt)
 
         if(member_debt > maximum_outstanding_debt):
            frappe.throw("Your outstanding debt is more than 500")

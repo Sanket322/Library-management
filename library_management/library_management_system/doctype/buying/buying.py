@@ -10,17 +10,15 @@ class Buying(Document):
 
     @frappe.whitelist()
     def getDatabaseBooks(self): 
-        memberExists = frappe.db.get_list('Books') 
-        return memberExists
+        databaseBooks = frappe.db.get_list('Books') 
+        return databaseBooks
     
 	    
     @frappe.whitelist()
     def insertBooks(self,books,quentity):
         books = json.loads(books);
-        print(books)
 		
         for i in range(quentity):
-            print(books[i])
 
             book_doc = frappe.get_doc({
 				'doctype': 'Books',
@@ -36,8 +34,9 @@ class Buying(Document):
             try:
                 book_doc.insert()
             except Exception as e:
-                #if code duplication error comes don;t break this
+                #if code duplication error comes don't break loop
                 if e.http_status_code == 409:
+                    frappe.errprint(books[i]['article_name']);
                     pass
                 else:
                     return f"Error inserting data: {e}"
