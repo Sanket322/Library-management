@@ -10,7 +10,7 @@ class Buying(Document):
 
     @frappe.whitelist()
     def getDatabaseBooks(self): 
-        databaseBooks = frappe.db.get_list('Books') 
+        databaseBooks = frappe.db.get_list('Book') 
         return databaseBooks
     
 	    
@@ -21,7 +21,7 @@ class Buying(Document):
         for i in range(quentity):
 
             book_doc = frappe.get_doc({
-				'doctype': 'Books',
+				'doctype': 'Book',
 				'article_name': books[i]['article_name'],
 				'author': books[i]['author'],
                 'isbn' : books[i]['isbn'],

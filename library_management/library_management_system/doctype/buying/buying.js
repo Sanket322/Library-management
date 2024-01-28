@@ -77,7 +77,7 @@ async function fetchBooks(api) {
 
         const booksdetail = data.message.map(book => {
             return {
-                'doctype': 'Books',
+                'doctype': 'Book',
                 'article_name': book.title,
                 'author': book.authors,
                 'status': 'Available',
