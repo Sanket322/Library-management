@@ -10,8 +10,7 @@ class Buying(Document):
 
     @frappe.whitelist()
     def getDatabaseBooks(self): 
-        databaseBooks = frappe.db.get_list('Book') 
-        return databaseBooks
+        return frappe.db.get_list('Book')  
     
 	    
     @frappe.whitelist()
