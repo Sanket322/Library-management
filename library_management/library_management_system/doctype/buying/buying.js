@@ -1,11 +1,9 @@
 // Copyright (c) 2024, sanket and contributors
 // For license information, please see license.txt
 var existingBooks = []
-
 frappe.ui.form.on("Buying", {
 
     before_save: async function (frm) {
-
         if (frm.doc.quentity <= 0) frappe.throw("Quentity Can not be zero or negative")
         const r = await frm.call({
             doc: frm.doc,
@@ -18,16 +16,16 @@ frappe.ui.form.on("Buying", {
 
         let userRequiredQuentity = frm.doc.quentity || 5;
         let title = frm.doc.book_name ? frm.doc.book_name.trim() : "";
-        let page = 1,afetrLength = 0;
+        let page = 1,afterLength = 0;
         var newBookDetail = [];
 
-        while (afetrLength < userRequiredQuentity && page <= 200) {
+        while (afterLength < userRequiredQuentity && page <= 200) {
 
             let api = `https://frappe.io/api/method/frappe-library?page=${page}&title=${title}`
 
             newBookDetail = await checkNewBooks(api, newBookDetail, existingBooks)
-            afetrLength = newBookDetail.length
-
+            afterLength = newBookDetail.length
+            
             page += 1;
         }
 
@@ -51,17 +49,16 @@ frappe.ui.form.on("Buying", {
 async function checkNewBooks(api, newBookDetail, existingBooks) {
 
     var booksdetail = await fetchBooks(api)
-
+    
     for (let i = 0; i < booksdetail.length; i++) {
-        let j = 0;
+        let j = 0,exist=false;
         for (j = 0; j < existingBooks.length; j++) {
-
-            if (existingBooks[j]['name'].trim() == booksdetail[i]['article_name'].trim()
-                || existingBooks[j]['isbn'] == booksdetail[i]['isbn']) {
+            if (existingBooks[j] === booksdetail[i]['isbn']) {
+                exist = true;
                 break;
             }
         }
-        if (j == existingBooks.length) newBookDetail.push(booksdetail[i])
+        if (exist == false) newBookDetail.push(booksdetail[i])
     }
     return newBookDetail;
 }
@@ -74,7 +71,6 @@ async function fetchBooks(api) {
             frappe.throw(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-
         const booksdetail = data.message.map(book => {
             return {
                 'doctype': 'Book',
@@ -90,7 +86,6 @@ async function fetchBooks(api) {
             };
         });
         return booksdetail
-
     } catch (error) {
         frappe.throw('Error While fetching the data,error is : ', error);
         return;
